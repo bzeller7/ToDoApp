@@ -21,5 +21,13 @@ namespace ToDoApp.Models
             return (from task in context.ToDos
                     select task).ToList();
         }
+        public static ToDo GetTask (ToDoContext context, string title)
+        {
+            ToDo task = context
+                            .ToDos
+                            .Where(item => item.Title == title)
+                            .Single();
+            return task;
+        }
     }
 }

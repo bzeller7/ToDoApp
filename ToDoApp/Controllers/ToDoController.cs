@@ -25,7 +25,7 @@ namespace ToDoApp.Controllers
         {
             return View();
         }
-        [HttpGet]
+        [HttpPost]
         public IActionResult CreateTask(ToDo task)
         {
             if (ModelState.IsValid)
@@ -33,16 +33,17 @@ namespace ToDoApp.Controllers
                 TaskDB.AddTask(task, context);
 
                 ViewData["Message"] = "the task was added!";
+                return View();
             }
             return View(task);
         }
-        //public IActionResult Edit(string title)
-        //{
-        //    //get the product by id
-        //    ToDo task = TaskDB.GetToDos(context, title);
 
-        //    //show it on the web page
+        //public IActionResult Edit (string Title)
+        //{
+        //    ToDo task = TaskDB.GetToDos(context, Title);
+
         //    return View(task);
         //}
+       
     }
 }
