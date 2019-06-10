@@ -32,18 +32,15 @@ namespace ToDoApp.Controllers
             {
                 TaskDB.AddTask(task, context);
 
-                ViewData["Message"] = "the task was added!";
-                return View();
             }
             return View(task);
         }
+        [HttpGet]
+        public IActionResult EditTask(int id)
+        {
+            ToDo item = TaskDB.GetTask(context, id);
+            return View(item);
+        }
 
-        //public IActionResult Edit (string Title)
-        //{
-        //    ToDo task = TaskDB.GetToDos(context, Title);
-
-        //    return View(task);
-        //}
-       
     }
 }
