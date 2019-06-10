@@ -25,6 +25,11 @@ namespace ToDoApp.Controllers
         {
             return View();
         }
+
+        public IActionResult DeleteTask()
+        {
+            return View();
+        }
         [HttpPost]
         public IActionResult CreateTask(ToDo task)
         {
@@ -41,6 +46,33 @@ namespace ToDoApp.Controllers
             ToDo item = TaskDB.GetTask(context, id);
             return View(item);
         }
+        [HttpPost]
+        public IActionResult EditTask(ToDo item)
+        {
+            if (ModelState.IsValid)
+            {
+                context.Update(item);
+                context.SaveChanges();
+            }
+            return View(item);
+        }
+        [HttpGet]
+        public IActionResult DeleteTask(int id)
+        {
+            ToDo item = TaskDB.GetTask(context, id);
+            return View(item);
+        }
+        [HttpPost]
+        public IActionResult CompleteTask(int id)
+        {
+            
+            ToDo item = TaskDB.GetTask(context, id);
+            context.ToDos.Remove(item);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
 
     }
 }
